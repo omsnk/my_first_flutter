@@ -13,12 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // เมธอด build() ส่งคืนโครงสร้างต้นไม้วิดเจ็ตสำหรับวิดเจ็ตนี้
     return MaterialApp(
+      title: 'My Awesome App',
+      debugShowCheckedModeBanner: false, // ซ่อนแบนเนอร์ debug
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+        useMaterial3: true, // ใช้ Material Design เวอร์ชันล่าสุด
       ),
-      title: 'Flutter Demo',
-      home: const MyHomePage(),
+      home: const MyHomePage(), // วิดเจ็ตหน้าจอหลักของคุณ
     );
   }
 }
@@ -31,32 +32,26 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       // ให้โครงสร้างแอปพื้นฐาน
       appBar: AppBar(
-        title: const Text('Chapter 3 Lab'),
-        backgroundColor: Colors.teal, // ปรับแต่งสี AppBar
+        title: const Text('Home Page'),
+        backgroundColor: Colors.blue, // ปรับแต่งสี AppBar
       ),
       body: Center(
+        // พื้นที่เนื้อหาหลัก
         child: Container(
-          padding: EdgeInsets.all(50.0),
+          padding: EdgeInsets.all(10),
           width: 300,
-          height: 200,
+          height: 150,
           decoration: BoxDecoration(
             color: Colors.amber,
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: const Text(
-            'Hello Flutter Widgets!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-          ),
+          child: Center(child: Image.asset('assets/images/cat.jpg')),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // การกระทำที่จะทำเมื่อกดปุ่ม
+          // ignore: avoid_print
           print('FAB Pressed!');
         },
         child: const Icon(Icons.add), // ไอคอนสำหรับปุ่ม
