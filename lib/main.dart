@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart'; // Import ไลบรารี Material ของ Flutter
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   // จุดเริ่มต้นของแอป Flutter
@@ -27,34 +28,98 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
+  // ภายในเมธอด build ของ MyHomePage
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ให้โครงสร้างแอปพื้นฐาน
       appBar: AppBar(
-        title: const Text('Home Page'),
-        backgroundColor: Colors.blue, // ปรับแต่งสี AppBar
+        title: const Text('Chapter 4'),
+        backgroundColor: Colors.blue,
       ),
-      body: Center(
-        // พื้นที่เนื้อหาหลัก
-        child: Container(
-          padding: EdgeInsets.all(10),
-          width: 300,
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Center(child: Image.asset('assets/images/cat.jpg')),
+      body: Padding(
+        // เพิ่ม Padding รอบ Column
+        padding: const EdgeInsets.all(16), // เว้นระยะจากขอบด้านใน
+        child: Column(
+          // ใช้ Column สำหรับเลย์เอาต์แนวตั้ง
+          // crossAxisAlignment:
+          //     CrossAxisAlignment.center, // จัดกึ่งกลางไอเท็มแนวนอน
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.network(
+              'https://picsum.photos/seed/flutter/400/200',
+              height: 150,
+              fit: BoxFit.fitHeight,
+            ),
+            const SizedBox(height: 16),
+            Image.asset(
+              'assets/images/cat.jpg',
+              height: 200,
+              fit: BoxFit.fitHeight,
+              errorBuilder: (context, error, stackTrace) {
+                // แนวปฏิบัติที่ดีแม้สำหรับ assets, เผื่อกรณีพาธผิด
+                return const Text(
+                  'เกิดข้อผิดพลาดในการโหลด asset',
+                  style: TextStyle(color: Colors.red),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            Container(
+              width: 300.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                color: Colors.lightGreenAccent,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'สวัสดี Flutter!',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.prompt(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // จัดกึ่งกลางปุ่มแนวนอน
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    print('กดปุ่ม Elevated');
+                  },
+                  child: const Text('Elevated'),
+                ),
+                const SizedBox(width: 10), // เว้นวรรคระหว่างปุ่ม
+                OutlinedButton(
+                  onPressed: () {
+                    print('กดปุ่ม Outlined');
+                  },
+                  child: const Icon(Icons.person),
+                ),
+                const SizedBox(width: 10), // เว้นวรรคระหว่างปุ่ม
+                TextButton(
+                  onPressed: () {
+                    print('กดปุ่ม Text');
+                  },
+                  child: const Text('Text'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            IconButton(
+              onPressed: () {
+                print('กดไอคอน Info');
+              },
+              icon: const Icon(Icons.info_outline),
+              iconSize: 50,
+              tooltip: 'ข้อมูล', // ข้อความช่วยเหลือ
+              color: Colors.blueGrey,
+            ),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // การกระทำที่จะทำเมื่อกดปุ่ม
-          // ignore: avoid_print
-          print('FAB Pressed!');
-        },
-        child: const Icon(Icons.add), // ไอคอนสำหรับปุ่ม
       ),
     );
   }
